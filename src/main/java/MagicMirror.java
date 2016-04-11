@@ -28,7 +28,7 @@ public class MagicMirror implements Runnable {
 	}
 	
 	public MagicMirror() {
-		this.gui = new View(this, "weathericons-regular-webfont.ttf");
+		this.gui = new View("weathericons-regular-webfont.ttf");
 		this.weatherIcon = new WeatherIcon();
 	}
 	
