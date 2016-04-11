@@ -7,6 +7,7 @@ Java app to run on Raspberry Pi, behind a mirror, to display weather info
 
 ---
 ### About:
+The plan is for this app to be loaded on a Raspberry Pi (with wifi capabilities, so probably Rasberry Pi 3 model B), with a PIR (Passive Infrared) sensor and a screen/display connected.  The screen will be placed behind the mirror, so that the display can be seen through the mirror.  When motion is detected in front of the mirror, the screen will turn on and info will be displayed to the user through the mirror.  Information to display includes: weather conditions, current temperature, relative temperature, and what types of clothes to wear for the current weather (pants or shorts, sweater or tshirt, type of jacket, etc.). 
 
 ---
 ### Dependencies:
