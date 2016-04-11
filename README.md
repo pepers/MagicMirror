@@ -10,5 +10,5 @@ Java app to run on Raspberry Pi, behind a mirror, to display weather info
 
 ---
 ### Dependencies:
-- [gson](https://github.com/google/gson) - [/src/resources/gson-2.6.2.jar](/src/resources/gson-2.6.2.jar)
-- [weather-icons](https://github.com/erikflowers/weather-icons) - [/src/resources/weathericons-regular-webfont.ttf](/src/resources/weathericons-regular-webfont.ttf)
+- [gson](https://github.com/google/gson) - [/src/resources/gson-2.6.2.jar](https://github.com/pepers/MagicMirror/tree/master/src/main/resources/gson-2.6.2.jar)
+- [weather-icons](https://github.com/erikflowers/weather-icons) - [/src/resources/weathericons-regular-webfont.ttf](https://github.com/pepers/MagicMirror/tree/master/src/main/resources/weathericons-regular-webfont.ttf)
