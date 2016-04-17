@@ -56,7 +56,7 @@ public class MagicMirror implements Runnable {
 			String condition = this.weatherIcon.getCondition(wID);
 			
 			// clothing data:			
-			this.clothing.setLevel(1); //TODO: calculate clothing level to set to
+			this.clothing.setLevel(clothingLevel(humIndex)); 
 			String head, torso, legs;
 			head = torso = legs = "";
 			try {
@@ -64,7 +64,7 @@ public class MagicMirror implements Runnable {
 				torso = this.clothing.getTorso();
 				legs  = this.clothing.getLegs();
 			} catch (Exception e) {
-				System.out.println("ERROR: clothing level was not set 1-6 inclusive. Exiting.");
+				System.out.println("ERROR: clothing level was not set 1-7 inclusive. Exiting.");
 				System.exit(0);
 			}
 			
@@ -172,4 +172,23 @@ public class MagicMirror implements Runnable {
 		return (float)hi;
 	}
 
+	/*
+	 * simple calculation of clothing level based on humidity index (relative temperature)
+	 * clothing level 1-7 (least clothing to most clothing) (see Clothing class)
+	 */
+	private int clothingLevel(float hi) {
+		int temp = Math.round(hi); // get an approximation of relative temperature 
+		int level = 1;             // level to return;
+		
+		// take care of levels 1-7
+		if (temp < -15) {                          level = 7;
+		} else if ((temp >= -15) && (temp < -7)) { level = 6;
+		} else if ((temp >= -7) && (temp < -1)) {  level = 5;		
+		} else if ((temp >= -1) && (temp < 5)) {   level = 4;		
+		} else if ((temp >= 5) && (temp < 10)) {   level = 3;		
+		} else if ((temp >= 10) && (temp < 15)) {  level = 2;	
+		} else if (temp >= 15) {                   level = 1; }
+		
+		return level;
+	}
 }

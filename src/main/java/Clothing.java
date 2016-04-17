@@ -6,8 +6,8 @@ package main.java;
 
 public class Clothing {
 	
-	// levels of clothing (1-6, least clothing to most clothing) for the weather:
-	private enum Level { ONE, TWO, THREE, FOUR,	FIVE, SIX; }
+	// levels of clothing (1-7, least clothing to most clothing) for the weather:
+	private enum Level { ONE, TWO, THREE, FOUR,	FIVE, SIX, SEVEN; }
 	private Clothing.Level level = Clothing.Level.ONE;
 	
 	// items of clothing
@@ -19,7 +19,8 @@ public class Clothing {
 		SHORTS("shorts"),
 		SWEATER("sweater"),
 		TSHIRT("tshirt"),
-		TUQUE("tuque");
+		TUQUE("tuque"),
+		TUQUESCARF("tuque and scarf");
 	
 		private String icon;    // icon of this clothing item
 		
@@ -41,6 +42,7 @@ public class Clothing {
 			case 4: this.level = Clothing.Level.FOUR;  break;
 			case 5: this.level = Clothing.Level.FIVE;  break;
 			case 6: this.level = Clothing.Level.SIX;   break;
+			case 7: this.level = Clothing.Level.SEVEN; break;
 			default: return false;
 		}
 		return true;
@@ -60,8 +62,10 @@ public class Clothing {
 				return Clothing.Item.NONE.getItem();
 			case FIVE : case SIX : 
 				return Clothing.Item.TUQUE.getItem();
+			case SEVEN:
+				return Clothing.Item.TUQUESCARF.getItem();
 			default :
-				throw new Exception("clothing level did not return clothing for legs");
+				throw new Exception("clothing level did not return clothing for head");
 		}
 	}
 	
@@ -76,7 +80,7 @@ public class Clothing {
 				return Clothing.Item.SWEATER.getItem();
 			case FOUR : case FIVE :
 				return Clothing.Item.JACKET.getItem();
-			case SIX :
+			case SIX : case SEVEN :
 				return Clothing.Item.PEACOAT.getItem();
 			default :
 				throw new Exception("clothing level did not return clothing for torso");
@@ -90,7 +94,7 @@ public class Clothing {
 		switch(this.level) {
 			case ONE :
 				return Clothing.Item.SHORTS.getItem();
-			case TWO : case THREE : case FOUR : case FIVE : case SIX :
+			case TWO : case THREE : case FOUR : case FIVE : case SIX : case SEVEN :
 				return Clothing.Item.PANTS.getItem();
 			default :
 				throw new Exception("clothing level did not return clothing for legs");

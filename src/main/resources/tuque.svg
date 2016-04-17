@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -70,13 +70,6 @@
        d="m 17.172593,1042.5132 13.63706,0 z"
        id="path3774"
        inkscape:connector-curvature="0" />
-    <ellipse
-       style="fill:#000000"
-       id="path3776"
-       cx="24.622469"
-       cy="1036.0104"
-       rx="0.50507629"
-       ry="0.44194174" />
     <ellipse
        style="fill:#000000"
        id="path3778"
