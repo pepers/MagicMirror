@@ -14,8 +14,10 @@ import java.time.format.DateTimeFormatter;
 
 public class MagicMirror implements Runnable {
 
-	private View gui;        // the program GUI
-	WeatherIcon weatherIcon; // the weather icons
+	private View gui;                // the program GUI
+	private WeatherIcon weatherIcon; // the weather icons
+	private Clothing clothing;       // the clothing to wear
+	
 	public final static int minBetweenCalls = 60; // number of minutes between api calls
 	
 	// open weather map api:
@@ -30,6 +32,7 @@ public class MagicMirror implements Runnable {
 	public MagicMirror() {
 		this.gui = new View("weathericons-regular-webfont.ttf");
 		this.weatherIcon = new WeatherIcon();
+		this.clothing = new Clothing();
 	}
 	
 	public void run() {
@@ -38,20 +41,38 @@ public class MagicMirror implements Runnable {
 			WeatherData data = new WeatherData(this.key, this.city, this.unit);
 			data.getJSON();
 			
-			// data:
-			long time = data.getTime();
-			long sunrise = data.getSunrise();
-			long sunset = data.getSunset();
+			// time/date data:
+			long time     = data.getTime();
+			long sunrise  = data.getSunrise();
+			long sunset   = data.getSunset();
 			boolean isDay = ((time >= sunrise) && (time < sunset)); // is it Day or Night?
-			float temp = data.getTemperature();
-			int humPerc = data.getHumidity();
-			float humIndex = fToC(humidityIndex(cToF(temp), humPerc)); 
-			int wID = data.getWeatherID();
-			String icon = this.weatherIcon.getIcon(isDay, wID);
+			
+			// weather data:
+			float temp       = data.getTemperature();
+			int humPerc      = data.getHumidity();
+			float humIndex   = fToC(humidityIndex(cToF(temp), humPerc)); 
+			int wID          = data.getWeatherID();
+			String icon      = this.weatherIcon.getIcon(isDay, wID);
 			String condition = this.weatherIcon.getCondition(wID);
 			
+			// clothing data:			
+			this.clothing.setLevel(1); //TODO: calculate clothing level to set to
+			String head, torso, legs;
+			head = torso = legs = "";
+			try {
+				head  = this.clothing.getHead();
+				torso = this.clothing.getTorso();
+				legs  = this.clothing.getLegs();
+			} catch (Exception e) {
+				System.out.println("ERROR: clothing level was not set 1-6 inclusive. Exiting.");
+				System.exit(0);
+			}
+			
 			// print data to console:
-			print(time, sunrise, sunset, isDay, temp, humPerc, humIndex, wID, condition);
+			printTimeDate(time, sunrise, sunset);
+			printWeather(isDay, temp, humPerc, humIndex, wID, condition);
+			printClothing(head, torso, legs);
+			System.out.println("");
 			
 			// inform gui:
 			this.gui.getCurrent().setTemp(Math.round(temp));
@@ -60,24 +81,37 @@ public class MagicMirror implements Runnable {
 			
 			try {
 				// sleep for 30min (weather update every 30min)
-				Thread.sleep(this.minBetweenCalls*60000);
+				Thread.sleep(MagicMirror.minBetweenCalls*60000);
 			} catch (InterruptedException e1) {
 				System.out.println("Error: could not sleep thread for " 
-						+ this.minBetweenCalls + "min: " + e1);
+						+ MagicMirror.minBetweenCalls + "min: " + e1);
 			}
 		}
 	}
 	
 	/*
-	 * print info obtained to console
+	 * print time/date info obtained to console
 	 */
-	private void print(long time, long sunrise, long sunset, boolean isDay, 
-			float temp, int humPerc, float humIndex, int wID, String condition) {
+	private void printTimeDate(long time, long sunrise, long sunset) {
+		System.out.printf("%-19s - Sun Rises at %s, and Sets at %s.\n", dateFormat(time), timeFormat(sunrise), timeFormat(sunset));	
+	}
+	
+	/*
+	 * print weather info obtained to console
+	 */
+	private void printWeather(boolean isDay, float temp, int humPerc, float humIndex, 
+			int wID, String condition) {
 		String dayNight = (isDay) ? "Day" : "Night";
-		System.out.printf("%-19s - Sun Rises at %s, and Sets at %s.\n", dateFormat(time), timeFormat(sunrise), timeFormat(sunset));
+		System.out.print("                    - ");	
+		System.out.printf("It is a %s %s.  The temperature is %.1fC, but feels like %.1fC, because of the %d%% humidity.\n", condition, dayNight, temp, humIndex, humPerc);
+	}
+	
+	/*
+	 * print clothing info obtained to console
+	 */
+	private void printClothing(String head, String torso, String legs) {
 		System.out.print("                    - ");
-		System.out.printf("It is a %s %s.  The temperature is %.1fC, but feels like %.1fC, because of the %d%% humidity.", condition, dayNight, temp, humIndex, humPerc);
-		System.out.println("");
+		System.out.printf("You should wear: %s on your head, a %s, and a pair of %s\n", head, torso, legs);
 	}
 	
 	/*
