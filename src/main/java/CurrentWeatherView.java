@@ -16,7 +16,7 @@ public class CurrentWeatherView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 		
-	private final String DEGREE_CELCIUS = "\uf03c";
+	private static final String DEGREE_CELCIUS = "\uf03c";
 	private String icon = "\uf07b";  // weather icon
 	private int currentTemp = 0;     // current temperature
 	private int feelsTemp = 0;       // current temperature feels like
