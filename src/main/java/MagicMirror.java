@@ -78,6 +78,9 @@ public class MagicMirror implements Runnable {
 			this.gui.getCurrent().setTemp(Math.round(temp));
 			this.gui.getCurrent().setFeels(Math.round(humIndex));
 			this.gui.getCurrent().setIcon(icon);
+			this.gui.getClothing().setHead(head);
+			this.gui.getClothing().setTorso(torso);
+			this.gui.getClothing().setLegs(legs);
 			
 			try {
 				// sleep for 30min (weather update every 30min)

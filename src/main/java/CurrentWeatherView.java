@@ -90,6 +90,8 @@ public class CurrentWeatherView extends JPanel {
 		// set the font size
 		label.setFont(new Font(labelFont.getName(), fontStyle, fontSizeToUse));
 	}
+	
+	// ***** PUBLIC METHODS: ***********************************************************
 		
 	// set the new temperature
 	public void setTemp(int newTemp) { 

@@ -14,6 +14,7 @@ public class View extends JFrame {
 	
 	private Font font;                         // the weather icons as font
 	private CurrentWeatherView currentWeather; // current weather view
+	private ClothingView clothing;             // clothing to wear view
 
 	public View(String strFont) {
 		this.font = this.loadFont(strFont);
@@ -30,7 +31,9 @@ public class View extends JFrame {
 		// add panels:
 		int cx = x;
 		this.currentWeather = new CurrentWeatherView(this.font, cx);
-		this.add(this.currentWeather);				
+		this.add(this.currentWeather);		
+		this.clothing = new ClothingView();
+		//TODO: add panels to clothing
 		
 		//this.setUndecorated(true); // Remove title bar TODO: uncomment when done
 		this.setVisible(true);
@@ -51,7 +54,8 @@ public class View extends JFrame {
 	
 	// ***** PUBLIC METHODS: ***********************************************************
 	
-	public CurrentWeatherView getCurrent() { return this.currentWeather; }
+	public CurrentWeatherView getCurrent()  { return this.currentWeather; }
+	public ClothingView       getClothing() { return this.clothing; }
 
 }
 
