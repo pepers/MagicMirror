@@ -1,5 +1,6 @@
 # MagicMirror
-Java app to run on Raspberry Pi, behind a mirror, to display weather info
+Java app to run on Raspberry Pi, behind a mirror, to display weather info   
+
 [![license](https://img.shields.io/badge/license-GPL3-blue.svg?style=flat)](https://github.com/pepers/MagicMirror/blob/master/LICENSE.md)
 
 ## Table of Contents:
