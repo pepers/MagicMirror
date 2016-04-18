@@ -5,83 +5,43 @@ package main.java;
  */
 
 import java.awt.Color;
-import java.io.IOException;
-import java.net.URI;
-
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-
-import com.kitfox.svg.app.beans.SVGPanel;
-import com.kitfox.svg.SVGCache;
-import com.kitfox.svg.SVGElement;
 
 public class ClothingView extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	
 	// panels for images:
-	private SVGPanel head;  
-	private SVGPanel torso; 
-	private SVGPanel legs;
+	private ImagePanel head;  
+	private ImagePanel torso; 
+	private ImagePanel legs;
 	
 	public ClothingView() {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		// Head:
-		this.head = new SVGPanel();
-		setHead("/clothing/tuque.svg");
+		this.head = new ImagePanel();
+		head.setBackground(Color.BLACK);
 		this.add(head);
-		head.setVisible(true);	
+		head.setVisible(true);
 		
 		// Torso:
-		this.torso = new SVGPanel();
-		setTorso("/clothing/tshirt.svg");
+		this.torso = new ImagePanel();
+		torso.setBackground(Color.BLACK);
 		this.add(torso);
 		torso.setVisible(true);
 		
 		// Legs:
-		this.legs = new SVGPanel();
-		setLegs("/clothing/pants.svg");
-		setColour(this.legs, "#ffffff");
+		this.legs = new ImagePanel();
+		legs.setBackground(Color.BLACK);
 		this.add(legs);
 		legs.setVisible(true);
 	}
 	
-	/*
-	 * change colour of svg 
-	 */
-	private void setColour(SVGPanel p, String c) {
-		SVGElement e = p.getSvgUniverse().getElement(p.getSvgURI());
-		// TODO: change colour
-	}
-	
 	// ***** PUBLIC METHODS: ***********************************************************
 	
-	public void setHead(String strHead)   { 
-		try {
-			URI uri = SVGCache.getSVGUniverse().loadSVG(this.getClass().getResourceAsStream(strHead), strHead);
-			this.head.setSvgURI(uri);
-		} catch (IOException e) {
-			System.out.println("ERROR: could not load head svg: " + e);
-		}
-	}
-	
-	public void setTorso(String strTorso) { 
-		try {
-			URI uri = SVGCache.getSVGUniverse().loadSVG(this.getClass().getResourceAsStream(strTorso), strTorso);
-			this.torso.setSvgURI(uri);
-		} catch (IOException e) {
-			System.out.println("ERROR: could not load torso svg: " + e);
-		}
-	}
-	
-	public void setLegs(String strLegs)   { 
-		try {
-			URI uri = SVGCache.getSVGUniverse().loadSVG(this.getClass().getResourceAsStream(strLegs), strLegs);
-			this.legs.setSvgURI(uri);
-		} catch (IOException e) {
-			System.out.println("ERROR: could not load legs svg: " + e);
-		}
-	}
-
+	public void setHead(String strHead)   { this.head.loadImage(strHead); }
+	public void setTorso(String strTorso) { this.torso.loadImage(strTorso); }
+	public void setLegs(String strLegs)   { this.legs.loadImage(strLegs); }
 }

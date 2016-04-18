@@ -10,17 +10,17 @@ public class Clothing {
 	private enum Level { ONE, TWO, THREE, FOUR,	FIVE, SIX, SEVEN; }
 	private Clothing.Level level = Clothing.Level.ONE;
 	
-	// items of clothing and their svg icon path and name
+	// items of clothing and their png icon path and name
 	private enum Item {
-		NONE      ("/clothing/none.svg",       "nothing"),
-		JACKET    ("/clothing/jacket.svg",     "jacket"),
-		PANTS     ("/clothing/pants.svg",      "pants"),
-		PEACOAT   ("/clothing/peacoat.svg",    "peacoat"),
-		SHORTS    ("/clothing/shorts.svg",     "shorts"),
-		SWEATER   ("/clothing/sweater.svg",    "sweater"),
-		TSHIRT    ("/clothing/tshirt.svg",     "tshirt"),
-		TUQUE     ("/clothing/tuque.svg",      "tuque"),
-		TUQUESCARF("/clothing/tuquescarf.svg", "tuque and scarf");
+		NONE      ("/clothing/none.png",       "nothing"),
+		JACKET    ("/clothing/jacket.png",     "jacket"),
+		PANTS     ("/clothing/pants.png",      "pants"),
+		PEACOAT   ("/clothing/peacoat.png",    "peacoat"),
+		SHORTS    ("/clothing/shorts.png",     "shorts"),
+		SWEATER   ("/clothing/sweater.png",    "sweater"),
+		TSHIRT    ("/clothing/tshirt.png",     "tshirt"),
+		TUQUE     ("/clothing/tuque.png",      "tuque"),
+		TUQUESCARF("/clothing/tuquescarf.png", "tuque and scarf");
 	
 		private String icon; // icon of this clothing item
 		private String name; // name of this clothing item   

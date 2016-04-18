@@ -14,5 +14,4 @@ The plan is for this app to be loaded on a Raspberry Pi (with wifi capabilities,
 ---
 ### Dependencies:
 - [gson](https://github.com/google/gson) - [/src/resources/gson-2.6.2.jar](https://github.com/pepers/MagicMirror/tree/master/src/main/resources/gson-2.6.2.jar)
-- [svgSalamander](https://svgsalamander.java.net/) - [/src/resources/svgSalamander.jar](https://github.com/pepers/MagicMirror/tree/master/src/main/resources/svgSalamander.jar)
 - [weather-icons](https://github.com/erikflowers/weather-icons) - [/src/resources/weathericons-regular-webfont.ttf](https://github.com/pepers/MagicMirror/tree/master/src/main/resources/weathericons-regular-webfont.ttf)
