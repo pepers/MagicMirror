@@ -57,12 +57,15 @@ public class MagicMirror implements Runnable {
 			
 			// clothing data:			
 			this.clothing.setLevel(clothingLevel(humIndex)); 
-			String head, torso, legs;
-			head = torso = legs = "";
+			String headIcon, torsoIcon, legsIcon, headName, torsoName, legsName;
+			headIcon = torsoIcon = legsIcon = headName = torsoName = legsName = "";
 			try {
-				head  = this.clothing.getHead();
-				torso = this.clothing.getTorso();
-				legs  = this.clothing.getLegs();
+				headIcon  = this.clothing.getHeadIcon();
+				torsoIcon = this.clothing.getTorsoIcon();
+				legsIcon  = this.clothing.getLegsIcon();
+				headName  = this.clothing.getHeadName();
+				torsoName = this.clothing.getTorsoName();
+				legsName  = this.clothing.getLegsName();
 			} catch (Exception e) {
 				System.out.println("ERROR: clothing level was not set 1-7 inclusive. Exiting.");
 				System.exit(0);
@@ -71,16 +74,16 @@ public class MagicMirror implements Runnable {
 			// print data to console:
 			printTimeDate(time, sunrise, sunset);
 			printWeather(isDay, temp, humPerc, humIndex, wID, condition);
-			printClothing(head, torso, legs);
+			printClothing(headName, torsoName, legsName);
 			System.out.println("");
 			
 			// inform gui:
 			this.gui.getCurrent().setTemp(Math.round(temp));
 			this.gui.getCurrent().setFeels(Math.round(humIndex));
 			this.gui.getCurrent().setIcon(icon);
-			this.gui.getClothing().setHead(head);
-			this.gui.getClothing().setTorso(torso);
-			this.gui.getClothing().setLegs(legs);
+			this.gui.getClothing().setHead(headIcon);
+			this.gui.getClothing().setTorso(torsoIcon);
+			this.gui.getClothing().setLegs(legsIcon);
 			
 			try {
 				// sleep for 30min (weather update every 30min)

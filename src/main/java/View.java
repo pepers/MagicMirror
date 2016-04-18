@@ -24,20 +24,19 @@ public class View extends JFrame {
 		this.pack(); // make frame just big enough for panels
 		
 		// set up layout:
-		this.setLayout(new GridLayout(0, 1));
-		int y = this.getHeight(); 
+		this.setLayout(new GridLayout(1, 0)); // 1 row, as many cols as necessary
 		int x = this.getWidth();
 		
 		// add panels:
-		int cx = x;
-		this.currentWeather = new CurrentWeatherView(this.font, cx);
+		int cwX = x/2;
+		this.currentWeather = new CurrentWeatherView(this.font, cwX);
 		this.add(this.currentWeather);		
 		this.clothing = new ClothingView();
-		//TODO: add panels to clothing
+		this.add(this.clothing);
 		
 		//this.setUndecorated(true); // Remove title bar TODO: uncomment when done
 		this.setVisible(true);
-		this.currentWeather.update();    // update the currentWeather
+		this.currentWeather.update(); // update the currentWeather
 	}
 	
 	private Font loadFont(String fontName) {

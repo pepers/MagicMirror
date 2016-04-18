@@ -1,5 +1,11 @@
 package main.java;
 
+/*
+ * display current weather:
+ * - weather condition icon, current temperature
+ * - relative temperature
+ */
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -7,10 +13,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-/*
- * display current weather
- */
+import javax.swing.SwingConstants;
 
 public class CurrentWeatherView extends JPanel {
 
@@ -24,37 +27,37 @@ public class CurrentWeatherView extends JPanel {
 	private JLabel current;    // icon + current temperature
 	private JLabel feelslike;  // current temperature feels like
 
-	public CurrentWeatherView(Font iconFont, int height) {
-		this.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		this.setBackground(Color.GREEN);
-			
+	public CurrentWeatherView(Font iconFont, int width) {
+		GridBagLayout gbl_currentWeather = new GridBagLayout();
+		gbl_currentWeather.columnWidths = new int[]{width, 0};
+		gbl_currentWeather.rowHeights = new int[] {1, 0, 0, 0};
+		gbl_currentWeather.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_currentWeather.rowWeights = new double[]{1.0, 1.0, 1.0};
+		this.setLayout(gbl_currentWeather);
+		
+		// Weather Condition Icon + Current Temperature	
 		current = new JLabel();
-		current.setBackground(Color.RED);
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 0.66;
-		c.ipady = 4*height/3;      // make this component tall
-		c.gridheight = 2;
-		c.gridx = 0;
-		c.gridy = 0;
 		current.setFont(iconFont);
 		current.setForeground(Color.WHITE);
-		current.setVisible(true);
-		this.add(current, c);
+		current.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_current = new GridBagConstraints();
+		gbc_current.gridheight = 2;
+		gbc_current.fill = GridBagConstraints.BOTH;
+		gbc_current.gridx = 0;
+		gbc_current.gridy = 0;
+		this.add(current, gbc_current);
 		
+		// "Feels like: " + Current Relative Temperature
 		feelslike = new JLabel();
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 0.33;
-		c.ipady = 2*height/3;
-		c.gridheight = 1;
-		c.gridx = 0;
-		c.gridy = 2;
-		c.anchor = GridBagConstraints.PAGE_END;
 		feelslike.setFont(iconFont);
 		feelslike.setForeground(Color.WHITE);
-		feelslike.setVisible(true);
-		this.add(feelslike, c);
-			
+		feelslike.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_feelslike = new GridBagConstraints();
+		gbc_feelslike.fill = GridBagConstraints.BOTH;
+		gbc_feelslike.gridx = 0;
+		gbc_feelslike.gridy = 2;
+		this.add(feelslike, gbc_feelslike);
+		
 		// JPanel
 		this.setBackground(Color.BLACK);
 		this.setOpaque(true);

@@ -10,25 +10,28 @@ public class Clothing {
 	private enum Level { ONE, TWO, THREE, FOUR,	FIVE, SIX, SEVEN; }
 	private Clothing.Level level = Clothing.Level.ONE;
 	
-	// items of clothing
+	// items of clothing and their svg icon path and name
 	private enum Item {
-		NONE("nothing"),
-		JACKET("jacket"),			// TODO: change string for loaded icon
-		PANTS("pants"),
-		PEACOAT("peacoat"),
-		SHORTS("shorts"),
-		SWEATER("sweater"),
-		TSHIRT("tshirt"),
-		TUQUE("tuque"),
-		TUQUESCARF("tuque and scarf");
+		NONE      ("/clothing/none.svg",       "nothing"),
+		JACKET    ("/clothing/jacket.svg",     "jacket"),
+		PANTS     ("/clothing/pants.svg",      "pants"),
+		PEACOAT   ("/clothing/peacoat.svg",    "peacoat"),
+		SHORTS    ("/clothing/shorts.svg",     "shorts"),
+		SWEATER   ("/clothing/sweater.svg",    "sweater"),
+		TSHIRT    ("/clothing/tshirt.svg",     "tshirt"),
+		TUQUE     ("/clothing/tuque.svg",      "tuque"),
+		TUQUESCARF("/clothing/tuquescarf.svg", "tuque and scarf");
 	
-		private String icon;    // icon of this clothing item
+		private String icon; // icon of this clothing item
+		private String name; // name of this clothing item   
 		
-		private Item (String icon) {	
+		private Item (String icon, String name) {	
 			this.icon = icon;
+			this.name = name;
 		}	
 		
-		private String getItem()  { return this.icon; }
+		private String getIcon()  { return this.icon; }
+		private String getName()  { return this.name; }
 	}
 	
 	/*
@@ -56,14 +59,14 @@ public class Clothing {
 	/*
 	 * return the clothing icon for head
 	 */
-	public String getHead() throws Exception {
+	public String getHeadIcon() throws Exception {
 		switch(this.level) {
 			case ONE : case TWO : case THREE : case FOUR : 
-				return Clothing.Item.NONE.getItem();
+				return Clothing.Item.NONE.getIcon();
 			case FIVE : case SIX : 
-				return Clothing.Item.TUQUE.getItem();
+				return Clothing.Item.TUQUE.getIcon();
 			case SEVEN:
-				return Clothing.Item.TUQUESCARF.getItem();
+				return Clothing.Item.TUQUESCARF.getIcon();
 			default :
 				throw new Exception("clothing level did not return clothing for head");
 		}
@@ -72,16 +75,16 @@ public class Clothing {
 	/*
 	 * return the clothing icon for torso
 	 */
-	public String getTorso() throws Exception {
+	public String getTorsoIcon() throws Exception {
 		switch(this.level) {
 			case ONE : case TWO :
-				return Clothing.Item.TSHIRT.getItem();
+				return Clothing.Item.TSHIRT.getIcon();
 			case THREE :
-				return Clothing.Item.SWEATER.getItem();
+				return Clothing.Item.SWEATER.getIcon();
 			case FOUR : case FIVE :
-				return Clothing.Item.JACKET.getItem();
+				return Clothing.Item.JACKET.getIcon();
 			case SIX : case SEVEN :
-				return Clothing.Item.PEACOAT.getItem();
+				return Clothing.Item.PEACOAT.getIcon();
 			default :
 				throw new Exception("clothing level did not return clothing for torso");
 		}
@@ -90,12 +93,60 @@ public class Clothing {
 	/*
 	 * return the clothing icon for legs
 	 */
-	public String getLegs() throws Exception {
+	public String getLegsIcon() throws Exception {
 		switch(this.level) {
 			case ONE :
-				return Clothing.Item.SHORTS.getItem();
+				return Clothing.Item.SHORTS.getIcon();
 			case TWO : case THREE : case FOUR : case FIVE : case SIX : case SEVEN :
-				return Clothing.Item.PANTS.getItem();
+				return Clothing.Item.PANTS.getIcon();
+			default :
+				throw new Exception("clothing level did not return clothing for legs");
+		}
+	}
+	
+	/*
+	 * return the clothing item for head
+	 */
+	public String getHeadName() throws Exception {
+		switch(this.level) {
+			case ONE : case TWO : case THREE : case FOUR : 
+				return Clothing.Item.NONE.getName();
+			case FIVE : case SIX : 
+				return Clothing.Item.TUQUE.getName();
+			case SEVEN:
+				return Clothing.Item.TUQUESCARF.getName();
+			default :
+				throw new Exception("clothing level did not return clothing for head");
+		}
+	}
+	
+	/*
+	 * return the clothing item for torso
+	 */
+	public String getTorsoName() throws Exception {
+		switch(this.level) {
+			case ONE : case TWO :
+				return Clothing.Item.TSHIRT.getName();
+			case THREE :
+				return Clothing.Item.SWEATER.getName();
+			case FOUR : case FIVE :
+				return Clothing.Item.JACKET.getName();
+			case SIX : case SEVEN :
+				return Clothing.Item.PEACOAT.getName();
+			default :
+				throw new Exception("clothing level did not return clothing for torso");
+		}
+	}
+	
+	/*
+	 * return the clothing item for legs
+	 */
+	public String getLegsName() throws Exception {
+		switch(this.level) {
+			case ONE :
+				return Clothing.Item.SHORTS.getName();
+			case TWO : case THREE : case FOUR : case FIVE : case SIX : case SEVEN :
+				return Clothing.Item.PANTS.getName();
 			default :
 				throw new Exception("clothing level did not return clothing for legs");
 		}
