@@ -187,13 +187,13 @@ public class MagicMirror implements Runnable {
 		int level = 1;             // level to return;
 		
 		// take care of levels 1-7
-		if (temp < -15) {                          level = 7;
-		} else if ((temp >= -15) && (temp < -7)) { level = 6;
-		} else if ((temp >= -7) && (temp < -1)) {  level = 5;		
-		} else if ((temp >= -1) && (temp < 5)) {   level = 4;		
-		} else if ((temp >= 5) && (temp < 10)) {   level = 3;		
-		} else if ((temp >= 10) && (temp < 15)) {  level = 2;	
-		} else if (temp >= 15) {                   level = 1; }
+		if (temp < -5) {                          level = 7;
+		} else if ((temp >= -5) && (temp < 0)) {  level = 6;
+		} else if ((temp >= 0) && (temp < 5)) {   level = 5;		
+		} else if ((temp >= 5) && (temp < 10)) {  level = 4;		
+		} else if ((temp >= 10) && (temp < 15)) { level = 3;		
+		} else if ((temp >= 15) && (temp < 25)) { level = 2;	
+		} else if (temp >= 25) {                  level = 1; }
 		
 		return level;
 	}
