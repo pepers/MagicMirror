@@ -25,6 +25,13 @@ public class MagicMirror implements Runnable {
 	private final int city = 6094817;                                 // Ottawa, CA
 	private final WeatherData.Units unit = WeatherData.Units.CELCIUS; // units in Celcius
 	
+	// pi4j PIR motion detection:
+	/* TODO: set correct pins and uncomment once system (raspberry pi + pir) is set up
+	final GpioController gpioSensor = GpioFactory.getInstance(); 
+	final GpioPinDigitalInput sensor = gpioSensor.provisionDigitalInputPin(RaspiPin.GPIO_04, PinPullResistance.PULL_DOWN);          
+	final GpioController gpioLED = GpioFactory.getInstance();           
+	final GpioPinDigitalOutput led = gpioLED.provisionDigitalOutputPin(RaspiPin.GPIO_05, "LED", PinState.HIGH);         
+	*/
 	public static void main(String[] args) {
 		(new Thread(new MagicMirror())).start();
 	}
@@ -33,6 +40,28 @@ public class MagicMirror implements Runnable {
 		this.gui = new View("weathericons-regular-webfont.ttf");
 		this.weatherIcon = new WeatherIcon();
 		this.clothing = new Clothing();
+		
+		/* TODO: uncomment when raspberry pi and pir is set up
+		led.high(); TODO: uncomment when raspberry pi and pir is set up
+		// create and register gpio pin listener
+		sensor.addListener(new GpioPinListenerDigital() {           
+			@Override       
+			public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {        
+				if(event.getState().isHigh()){  
+					System.out.println("Motion Detected!"); 
+					led.toggle();
+					// make JNI wrapper for C functions to turn monitor on:
+					// SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) -1);		 
+				}  
+				if(event.getState().isLow()){   
+					System.out.println("All is quiet...");
+					led.toggle();
+					// make JNI wrapper for C functions to turn monitor off:
+					// SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) 2); 
+				} 
+			}  
+		});   
+		*/ 
 	}
 	
 	public void run() {

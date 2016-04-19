@@ -19,6 +19,7 @@ public class ClothingView extends JPanel {
 	
 	public ClothingView() {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setBackground(Color.BLACK); // without this, there may be a white line at bottom
 		
 		// Head:
 		this.head = new ImagePanel();
