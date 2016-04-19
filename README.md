@@ -15,4 +15,4 @@ The plan is for this app to be loaded on a Raspberry Pi (with wifi capabilities,
 ### Dependencies:
 - [gson](https://github.com/google/gson) - [/src/resources/gson-2.6.2.jar](https://github.com/pepers/MagicMirror/tree/master/src/main/resources/gson-2.6.2.jar)
 - [weather-icons](https://github.com/erikflowers/weather-icons) - [/src/resources/weathericons-regular-webfont.ttf](https://github.com/pepers/MagicMirror/tree/master/src/main/resources/weathericons-regular-webfont.ttf)
-- [pi4j](pi4j.com) - TODO: install for PIR motion detection support
+- [pi4j](http://www.pi4j.com) - TODO: install for PIR motion detection support
