@@ -6,6 +6,7 @@ Java app to run on Raspberry Pi, behind a mirror, to display weather info
 ## Table of Contents:
 1. [About](README.md#about)
 2. [Dependencies](README.md#dependencies)
+3. [Notes](README.md#notes)
 
 ---
 ### About:
@@ -16,3 +17,10 @@ The plan is for this app to be loaded on a Raspberry Pi (with wifi capabilities,
 - [gson](https://github.com/google/gson) - [/src/resources/gson-2.6.2.jar](https://github.com/pepers/MagicMirror/tree/master/src/main/resources/gson-2.6.2.jar)
 - [weather-icons](https://github.com/erikflowers/weather-icons) - [/src/resources/weathericons-regular-webfont.ttf](https://github.com/pepers/MagicMirror/tree/master/src/main/resources/weathericons-regular-webfont.ttf)
 - [pi4j](http://www.pi4j.com) - TODO: install for PIR motion detection support
+
+---
+### Notes:
+- while in main directory (/MagicMirror); used `javah -classpath bin -jni -d jni main.java.MagicMirror` to generate C header file for two methods to turn monitor on/off
+  - compile dlls in windows with [mingw](http://www.mingw.org/) (use [mingw-w64](https://mingw-w64.org/) for 64bit Windows) (use `.so` instead of `.dll` when recompiling under Linux for Rasberry Pi)
+    - Windows - 32bit Java - `gcc -o monitor_toggle32.dll -shared "C:\Program Files\Java\jdk1.8.0_74\include\jni.h" monitor_toggle.c`
+    - Windows - 64bit Java - `gcc -m64 -o monitor_toggle64.dll -shared "C:\Program Files\Java\jdk1.8.0_74\include\jni.h" monitor_toggle.c`

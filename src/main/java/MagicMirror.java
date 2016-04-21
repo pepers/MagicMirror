@@ -1,9 +1,5 @@
 package main.java;
 
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-
 /*
  * by Matthew Pepers
  * 
@@ -11,6 +7,10 @@ import java.time.format.DateTimeFormatter;
  * display the current weather, read the daily forecast, and suggest what
  * clothing the user should wear today.
  */
+
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 public class MagicMirror implements Runnable {
 
@@ -24,6 +24,14 @@ public class MagicMirror implements Runnable {
 	private final String key = "f886e3a99da41b3c10ec6c92ac46583d";    // my owm api key
 	private final int city = 6094817;                                 // Ottawa, CA
 	private final WeatherData.Units unit = WeatherData.Units.CELCIUS; // units in Celcius
+	 
+	// C methods to turn monitor on/off:
+	native void cMonitorOn();
+	native void cMonitorOff();
+	static String archDataModel = System.getProperty("sun.arch.data.model"); // get java arch
+	static {
+		System.loadLibrary("/jni/monitor_toggle" + archDataModel);
+	}
 	
 	// pi4j PIR motion detection:
 	/* TODO: set correct pins and uncomment once system (raspberry pi + pir) is set up
@@ -50,14 +58,10 @@ public class MagicMirror implements Runnable {
 				if(event.getState().isHigh()){  
 					System.out.println("Motion Detected!"); 
 					led.toggle();
-					// make JNI wrapper for C functions to turn monitor on:
-					// SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) -1);		 
 				}  
 				if(event.getState().isLow()){   
 					System.out.println("All is quiet...");
 					led.toggle();
-					// make JNI wrapper for C functions to turn monitor off:
-					// SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) 2); 
 				} 
 			}  
 		});   
@@ -65,6 +69,15 @@ public class MagicMirror implements Runnable {
 	}
 	
 	public void run() {
+		/* monitor on/off test:
+		cMonitorOff();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e2) {
+			e2.printStackTrace();
+		}
+		cMonitorOn();
+		*/
 		while(true) {
 			// get weather info for Ottawa, Ontario, Canada
 			WeatherData data = new WeatherData(this.key, this.city, this.unit);
